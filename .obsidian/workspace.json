@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "c09e274af7faa554",
+    "type": "split",
+    "children": [
+      {
+        "id": "6fa05d3ed990a968",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1fe4053aded4ab73",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "05-linux-log/log-debug-note.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "log-debug-note"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1d2995b69919b3bb",
+    "type": "split",
+    "children": [
+      {
+        "id": "95af2ef3ebf2a553",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b92dfafdb2f0ad5c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "0a6b1d45c973da3f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "25fdb07173467773",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 227.5
+  },
+  "right": {
+    "id": "469a57cd6a45e9aa",
+    "type": "split",
+    "children": [
+      {
+        "id": "10e97252cb2e5c4f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ede7215d35dbfc6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "04-mysql-check/mysql-test-record.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "4a4c9d5308f321bc",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "04-mysql-check/mysql-test-record.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "39f678b3d00681d1",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "df570704453ea68e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "ec33e781b6e65244",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04-mysql-check/mysql-test-record.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "1fe4053aded4ab73",
+  "lastOpenFiles": [
+    "04-mysql-check/mysql-test-record.md",
+    "03-bug/bug-list.md",
+    "01-requirement/requirement-note.md",
+    "02-testcase/functional-testcase.md",
+    "06-test-report.md",
+    "README.md",
+    "env-deployment.md",
+    "项目工作扫描与简历出入汇报.md",
+    "05-linux-log/log-debug-note.md",
+    "05-linux-log/linux-command.md",
+    "img/Pasted image 20260817185411.png",
+    "06-api-test/api-testcase.md",
+    "04-mysql-check/test-data-examples.md",
+    "04-mysql-check/table-mapping-audit.md",
+    "04-mysql-check/precheck-result.md",
+    "02-testcase/test-point-implementation.md",
+    "02-testcase/functional-testcase.md.bak",
+    "_reid_map.json",
+    "fix_reports_tmp.py",
+    "fix_testcase_tmp.py",
+    "04-mysql-check/order-check.sql",
+    "04-mysql-check/user-register-check.sql",
+    "04-mysql-check/schema-check.sql"
+  ]
+}

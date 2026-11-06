@@ -23,7 +23,7 @@ SELECT customer_id, LENGTH(password) AS pwd_len, LEFT(password,4) AS pwd_prefix,
        LENGTH(salt) AS salt_len FROM oc_customer;
 ```
 记录：确认成功，与预期相符。
-![[Pasted image 20260817185411.png]]
+![]\(../img/Pasted image 20260817185411.png\)
 
 ### 测试场景2：用户注册字段校验（关联 BUG-001~007）
 注册/修改账户时输入非法字符或非法邮箱格式，确认数据库是否落入脏数据：
@@ -46,8 +46,8 @@ WHERE firstname REGEXP '[^一-龥a-zA-Z0-9 .-]'
    OR lastname  REGEXP '[^一-龥a-zA-Z0-9 .-]'
    OR city      REGEXP '[^一-龥a-zA-Z0-9 .-]';
 ```
-记录（关联缺陷）：BUG-001 / BUG-002 / BUG-003 / BUG-004 / BUG-005 / BUG-006 / BUG-007 —— 字段校验缺失，脏数据可入库。
-![[Pasted image 20260821163608.png]]
+记录（关联缺陷）：BUG-001 / BUG-002 / BUG-003 / BUG-005 / BUG-006 / BUG-007（名字/姓氏/电话/邮箱 字段校验缺失，脏数据可入库）；另 BUG-008（生日自定义字段未校验未来日期）。注：原 BUG-004（密码非法字符）已撤销——OpenCart 密码仅校验长度 4–20，接受特殊字符属预期行为，非缺陷。
+![]\(../img/Pasted image 20260821163608.png\)
 
 ### 测试场景3：用户登录校验
 执行登录后核对：
@@ -61,7 +61,7 @@ SELECT * FROM oc_customer_activity WHERE customer_id = 1 ORDER BY date_added DES
 SELECT * FROM oc_customer_login WHERE email = 'test@demo.com' ORDER BY date_added DESC LIMIT 10;
 ```
 记录：
-![[Pasted image 20260821164056.png]]
+![]\(../img/Pasted image 20260821164056.png\)
 
 ### 测试场景4：修改账户信息
 已登录用户修改姓名/电话/邮箱后，确认 `oc_customer` 对应字段更新，且密码修改只更新哈希不回写明文。
@@ -75,9 +75,9 @@ FROM oc_address WHERE customer_id = 1;
 ```
 记录：
 修改前：
-![[Pasted image 20260821164350.png]]
+![]\(../img/Pasted image 20260821164350.png\)
 修改后：
-![[Pasted image 20260821164527.png]]
+![]\(../img/Pasted image 20260821164527.png\)
 
 ### 测试场景5：商品收藏（oc_customer_wishlist）
 前台点击「加入收藏」后，确认：
@@ -91,14 +91,14 @@ SELECT count(*) AS wish_count FROM oc_customer_wishlist WHERE customer_id=1;
 ```
 记录：
 收藏前：
-![[Pasted image 20260821164951.png]]
-![[Pasted image 20260821164846.png]]
+![]\(../img/Pasted image 20260821164951.png\)
+![]\(../img/Pasted image 20260821164846.png\)
 收藏后
-![[Pasted image 20260821165027.png]]
-![[Pasted image 20260821165047.png]]
+![]\(../img/Pasted image 20260821165027.png\)
+![]\(../img/Pasted image 20260821165047.png\)
 取消一个收藏后：
-![[Pasted image 20260821165229.png]]
-![[Pasted image 20260821165208.png]]
+![]\(../img/Pasted image 20260821165229.png\)
+![]\(../img/Pasted image 20260821165208.png\)
 
 ### 测试场景6：购物车（oc_cart）
 
@@ -128,13 +128,13 @@ GROUP BY session_id ORDER BY last_added DESC;
 
 记录：
 未登录
-![[Pasted image 20260831195835.png]]
+![]\(../img/Pasted image 20260831195835.png\)
 登录后：
-![[Pasted image 20260831195957.png]]
+![]\(../img/Pasted image 20260831195957.png\)
 单个商品数量：
-![[Pasted image 20260831200029.png]]
+![]\(../img/Pasted image 20260831200029.png\)
 未登录购物车残留
-![[Pasted image 20260831200059.png]]
+![]\(../img/Pasted image 20260831200059.png\)
 
 ### 测试场景7：商品浏览 / 详情（oc_product 系列）
 进入商品详情页后核对：
@@ -168,8 +168,8 @@ SELECT * FROM oc_product_special WHERE product_id = 28;
 SELECT * FROM oc_product_to_category WHERE product_id = 28;
 ```
 记录：
-![[Pasted image 20260821175501.png]]
-![[Pasted image 20260821175814.png]]
+![]\(../img/Pasted image 20260821175501.png\)
+![]\(../img/Pasted image 20260821175814.png\)
 
 ### 测试场景8：用户下单（oc_order 系列）
 下单成功之后校验：
@@ -198,9 +198,9 @@ SELECT order_id, code, title, value, sort_order
 FROM oc_order_total WHERE order_id = 1 ORDER BY sort_order;
 ```
 记录：
-![[Pasted image 20260817185552.png]]
-![[Pasted image 20260817185932.png]]
-![[Pasted image 20260817190017.png]]
+![]\(../img/Pasted image 20260817185552.png\)
+![]\(../img/Pasted image 20260817185932.png\)
+![]\(../img/Pasted image 20260817190017.png\)
 
 ### 测试场景9：商品搜索（oc_product_description）
 搜索关键词后核对：
@@ -220,7 +220,7 @@ WHERE p.status = 1
 SELECT product_id, model FROM oc_product WHERE model REGEXP '[<>]';
 ```
 记录：
-![[Pasted image 20260831164415.png]]
+![]\(../img/Pasted image 20260831164415.png\)
 ### 测试场景10：退换货申请（oc_return 系列）
 前台提交退换货申请，确认：
 1. `oc_return` 新增记录，关联 `order_id`/`product_id`
@@ -250,11 +250,11 @@ SELECT * FROM oc_return_action  WHERE language_id = 1;
 ```
 记录：
 新增一条记录：
-![[Pasted image 20260822164909.png]]
+![]\(../img/Pasted image 20260822164909.png\)
  后台审核通过：
- ![[Pasted image 20260822165024.png]]
+ ![]\(../img/Pasted image 20260822165024.png\)
  退还订单完成：
-![[Pasted image 20260822165056.png]]
+![]\(../img/Pasted image 20260822165056.png\)
 
 ### 测试场景11：首页推荐商品与品牌轮播
 核对首页推荐位与品牌轮播的数据来源：
@@ -276,11 +276,11 @@ ORDER BY m.sort_order;
 SELECT * FROM oc_layout_route WHERE route = 'common/home';
 ```
 记录：
-![[Pasted image 20260831164514.png]]
+![]\(../img/Pasted image 20260831164514.png\)
 
-![[Pasted image 20260831164530.png]]
+![]\(../img/Pasted image 20260831164530.png\)
 
-![[Pasted image 20260831164543.png]]
+![]\(../img/Pasted image 20260831164543.png\)
 ### 测试场景12：优惠券 / 礼品券 
 1. 使用优惠券 → `oc_coupon_history` 记录使用流水；**`oc_coupon` 本身没有 `used` 字段**
 2. `oc_coupon.uses_total` / `uses_customer` 是**配置上限，不会自增**；已用次数需 `COUNT(oc_coupon_history)`
@@ -317,9 +317,9 @@ SELECT * FROM oc_voucher_history WHERE voucher_id = 1;
 SELECT * FROM oc_order_voucher WHERE order_id = 1;
 ```
 记录：
-![[Pasted image 20260822170025.png]]
+![]\(../img/Pasted image 20260822170025.png\)
 
-![[Pasted image 20260822170040.png]]
+![]\(../img/Pasted image 20260822170040.png\)
 
 ### 测试场景13：商品评价（oc_review）
 提交评价后确认：
@@ -335,9 +335,9 @@ SELECT count(*) AS approved FROM oc_review WHERE product_id = 47 AND status = 1;
 SELECT status, COUNT(*) AS cnt FROM oc_review GROUP BY status;
 ```
 记录：
-![[Pasted image 20260831164630.png]]
+![]\(../img/Pasted image 20260831164630.png\)
 
-![[Pasted image 20260831164645.png]]
+![]\(../img/Pasted image 20260831164645.png\)
 ### 测试场景14：货币切换（oc_currency）
 切换货币后，确认 `oc_currency` 中目标货币 `value`（汇率）生效，前台价格按汇率换算展示。
 同时需确认 `oc_setting` 的 `config_currency` 与当前选择一致。
@@ -355,8 +355,8 @@ SELECT product_id, customer_group_id, price FROM oc_product_special  WHERE produ
 SELECT product_id, customer_group_id, price FROM oc_product_discount WHERE product_id = 47;
 ```
 记录：
-![[Pasted image 20260822171421.png]]
-![[Pasted image 20260822171446.png]]![[Pasted image 20260822171505.png]]
+![]\(../img/Pasted image 20260822171421.png\)
+![]\(../img/Pasted image 20260822171446.png\)![]\(../img/Pasted image 20260822171505.png\)
 
 ### 测试场景15：资讯信息（oc_information）
 后台新增/编辑资讯文章后，确认 `oc_information` 写入/更新，`status` 控制前台可见性；底部 Information 链接可访问。
@@ -373,9 +373,9 @@ ORDER BY i.sort_order;
 SELECT information_id, bottom, sort_order, status FROM oc_information WHERE bottom = 1;
 ```
 记录：
-![[Pasted image 20260831164738.png]]
+![]\(../img/Pasted image 20260831164738.png\)
 
-![[Pasted image 20260831164752.png]]
+![]\(../img/Pasted image 20260831164752.png\)
 ### 测试场景16：首页 Banner / SEO（oc_banner、oc_seo_url）
 1. 后台配置轮播 → `oc_banner` 写开关与名称，**图片/链接/标题在 `oc_banner_image`**
 2. 开启 SEO 伪静态 → `oc_seo_url` 生成关键词路由
@@ -392,9 +392,9 @@ SELECT seo_url_id, store_id, language_id, query, keyword
 FROM oc_seo_url WHERE query LIKE 'product_id=%';
 ```
 记录：
-![[Pasted image 20260831164935.png]]
+![]\(../img/Pasted image 20260831164935.png\)
 
-![[Pasted image 20260831164946.png]]
+![]\(../img/Pasted image 20260831164946.png\)
 ### 测试场景17：商品分类 / 品牌（oc_category 系列、oc_manufacturer）
 前台分类导航与品牌页，确认：
 1. 分类名在 `oc_category_description`，**顶部导航靠 `top=1`**
@@ -420,13 +420,13 @@ GROUP BY p2c.category_id;
 SELECT manufacturer_id, name, sort_order FROM oc_manufacturer ORDER BY sort_order;
 ```
 记录：
-![[Pasted image 20260831173728.png]]
+![]\(../img/Pasted image 20260831173728.png\)
 
-![[Pasted image 20260831173748.png]]
+![]\(../img/Pasted image 20260831173748.png\)
 
-![[Pasted image 20260831173803.png]]
+![]\(../img/Pasted image 20260831173803.png\)
 
-![[Pasted image 20260831173814.png]]
+![]\(../img/Pasted image 20260831173814.png\)
 ---
 
 ## 二、后台管理端（后端）数据库测试
@@ -468,11 +468,11 @@ SELECT * FROM oc_customer_approval;
 SELECT customer_id, email, status FROM oc_customer WHERE status = 0;
 ```
 记录：
-![[Pasted image 20260831204540.png]]
-![[Pasted image 20260831204602.png]]
-![[Pasted image 20260831204626.png]]
-![[Pasted image 20260831204648.png]]
-![[Pasted image 20260831204649.png]]
+![]\(../img/Pasted image 20260831204540.png\)
+![]\(../img/Pasted image 20260831204602.png\)
+![]\(../img/Pasted image 20260831204626.png\)
+![]\(../img/Pasted image 20260831204648.png\)
+![]\(../img/Pasted image 20260831204649.png\)
 ### 测试场景19：商品目录管理
 （oc_product、oc_category、oc_product_option、oc_attribute、oc_filter、oc_download）
 1. 后台新增/编辑商品 → `oc_product` 写入；上下架切换 `status`
@@ -523,10 +523,10 @@ LEFT JOIN oc_download_description dd ON d.download_id = dd.download_id AND dd.la
 SELECT * FROM oc_product_to_download;
 ```
 记录：
-![[Pasted image 20260831204959.png]]
-![[Pasted image 20260831205029.png]]
-![[Pasted image 20260831205045.png]]
-![[Pasted image 20260831205112.png]]
+![]\(../img/Pasted image 20260831204959.png\)
+![]\(../img/Pasted image 20260831205029.png\)
+![]\(../img/Pasted image 20260831205045.png\)
+![]\(../img/Pasted image 20260831205112.png\)
 
 
 ### 测试场景20：系统设置 / 后台用户 / API 账号
@@ -552,10 +552,10 @@ SELECT api_session_id, api_id, session_id, ip, date_added
 FROM oc_api_session ORDER BY date_added DESC LIMIT 10;
 ```
 记录：
-![[Pasted image 20260831205459.png]]
-![[Pasted image 20260831205511.png]]
-![[Pasted image 20260831205532.png]]
-![[Pasted image 20260831205610.png]]
+![]\(../img/Pasted image 20260831205459.png\)
+![]\(../img/Pasted image 20260831205511.png\)
+![]\(../img/Pasted image 20260831205532.png\)
+![]\(../img/Pasted image 20260831205610.png\)
 ### 测试场景21：统计报表 
 产生订单、浏览商品后，确认：
 1. `oc_statistics` 统计值随业务更新（**注意复数 s，不是 `oc_statistic`**）
@@ -579,7 +579,7 @@ SELECT COUNT(*) AS order_cnt, SUM(total) AS sale_total FROM oc_order;
 SELECT COUNT(*) AS customer_cnt FROM oc_customer;
 ```
 记录：
-![[Pasted image 20260831205702.png]]
+![]\(../img/Pasted image 20260831205702.png\)
 ### 测试场景22：数据库备份
 系统维护执行备份，确认：
 1. 备份文件正常生成
@@ -589,7 +589,7 @@ SELECT COUNT(*) AS customer_cnt FROM oc_customer;
 CHECKSUM TABLE oc_customer, oc_order, oc_product, oc_order_product, oc_review;
 ```
 记录：
-![[Pasted image 20260831205730.png]]
+![]\(../img/Pasted image 20260831205730.png\)
 
 ### 测试场景23：页面布局 / 主题 / 语言编辑器
 （oc_layout*、oc_theme、oc_language、oc_translation）
@@ -611,7 +611,7 @@ SELECT translation_id, store_id, language_id, route, `key`, `value`
 FROM oc_translation LIMIT 50;
 ```
 记录：
-![[Pasted image 20260831210217.png]]
+![]\(../img/Pasted image 20260831210217.png\)
 ### 测试场景24：销售 — 订单状态流转与发货
 （oc_order_history、oc_order_status）
 1. 后台修改订单状态 → `oc_order_history` 插入一条流水
@@ -635,7 +635,7 @@ FROM oc_order o;
 SELECT order_status_id, language_id, name FROM oc_order_status ORDER BY order_status_id, language_id;
 ```
 记录：
-![[Pasted image 20260831210259.png]]
+![]\(../img/Pasted image 20260831210259.png\)
 
 ### 测试场景25：Dashboard 仪表盘数据一致性 
 页面统计数字与数据库聚合结果双向核对。
@@ -657,7 +657,7 @@ SELECT DATE(date_added) AS d, COUNT(*) AS order_cnt, SUM(total) AS amount
 FROM oc_order GROUP BY DATE(date_added) ORDER BY d DESC LIMIT 30;
 ```
 记录：
-![[Pasted image 20260831210558.png]]
+![]\(../img/Pasted image 20260831210558.png\)
 ---
 
 ## 三、异常 / 缺陷关联校验
@@ -665,11 +665,11 @@ FROM oc_order GROUP BY DATE(date_added) ORDER BY d DESC LIMIT 30;
 | 校验项 | 预期 | 关联缺陷 | 记录 |
 | --- | --- | --- | --- |
 | 提交非法格式邮箱，观察 `oc_customer` 是否写入脏数据 | 拦截、不入库 | BUG-002（注册邮箱）、BUG-006（修改邮箱） | 实际非法邮箱入库 ✗ |
-| 用户模块字段（名字/姓氏/电话/密码）输入非法字符 | 拦截、不入库 | BUG-001/002/003/004/005/007 | 实际非法字符入库 ✗ |
+| 用户模块字段（名字/姓氏/电话/密码）输入非法字符 | 拦截、不入库 | BUG-001/002/003/005/007 | 实际非法字符入库 ✗ |
 | 地址簿入口（`oc_address`）脏数据检查 | 拦截、不入库 | 同上（补充检查点） | 待执行，见场景2 |
 | 重复下单，核对 `oc_product.quantity` 扣减逻辑（超卖） | 每次下单 -1，库存为 0 禁止下单 | 原 BUG-003（超卖） | 本次用例集无对应失败，需补充负数/并发用例复测 |
 | 购物车输入负数数量并保存 | 拦截负数、提示合法数字 | 原 BUG-001（购物车负数） | 当前用例集无失败记录，需补充用例复测 |
 | 未登录购物车换 session 后残留 `oc_cart` 孤儿数据 | 应清理或合并 | 新增检查点（见场景6-4） | 待执行 |
 | 退换货审核通过后库存/金额未回退 | OpenCart 设计为人工处理，**非缺陷** | 预期已修正，勿误报 | 见场景10 说明 |
-| 修改账户信息地址为空提交 | 提示地址不能为空、拦截 | 用例设计修正（FE-USR-082/084/096/098）非缺陷 | 系统行为正确，修正用例即可 |
+| 修改账户信息地址为空提交 | 提示地址不能为空、拦截 | 用例设计修正（FE-USR-083/084/096/098）非缺陷 | 系统行为正确，修正用例即可 |
 
